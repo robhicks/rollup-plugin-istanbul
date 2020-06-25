@@ -2,29 +2,26 @@ import { createFilter } from 'rollup-pluginutils';
 import istanbul from 'istanbul-lib-instrument';
 
 export default function (options = {}) {
+  options.include = options.include || [];
+  options.exclude = options.exclude || [];
+  options.instrumenterConfig = options.instrumenterConfig || {};
+
   const filter = createFilter(options.include, options.exclude);
 
   return {
     transform (code, id) {
       if (!filter(id)) return;
 
-      var instrumenter;
-      var sourceMap = !!options.sourceMap;
-      var opts = Object.assign({}, options.instrumenterConfig);
-
-      if (sourceMap) {
-        opts.codeGenerationOptions = Object.assign({},
-          opts.codeGenerationOptions || {format: {compact: !opts.noCompact}},
-          {sourceMap: id, sourceMapWithCode: true}
-        );
-      }
+      let instrumenter;
+      const sourceMap = !!options.sourceMap;
+      const opts = Object.assign({}, options.instrumenterConfig);
 
       opts.esModules = true;
       instrumenter = new (options.instrumenter || istanbul).createInstrumenter(opts);
 
       code = instrumenter.instrumentSync(code, id);
 
-      var map = sourceMap ?
+      const map = sourceMap ?
         instrumenter.lastSourceMap().toJSON() :
         {mappings: ''};
 
