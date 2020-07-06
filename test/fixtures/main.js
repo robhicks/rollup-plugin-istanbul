@@ -1,7 +1,13 @@
-function foo(bar) {
-    if (bar) {
-        whatever.do();
-    } else {
-        whatever.stop();
-    }
+export class FooBar {
+  constructor () {
+
+  }
+
+  load () {
+
+  }
+
+  test () {
+
+  }
 }

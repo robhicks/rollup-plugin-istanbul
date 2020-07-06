@@ -1,7 +1,7 @@
 import { createFilter } from '@rollup/pluginutils';
 import istanbul from 'istanbul-lib-instrument';
 
-export default function (options = {}) {
+function index (options = {}) {
   const filter = createFilter(options.include, options.exclude);
 
   return {
@@ -32,3 +32,5 @@ export default function (options = {}) {
     }
   };
 }
+
+export default index;

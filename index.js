@@ -1,8 +1,12 @@
-import { createFilter } from '@rollup/pluginutils';
-import istanbul from 'istanbul-lib-instrument';
+'use strict';
 
-export default function (options = {}) {
-  const filter = createFilter(options.include, options.exclude);
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var pluginutils = require('@rollup/pluginutils');
+var istanbul = _interopDefault(require('istanbul-lib-instrument'));
+
+function index (options = {}) {
+  const filter = pluginutils.createFilter(options.include, options.exclude);
 
   return {
     transform (code, id) {
@@ -32,3 +36,5 @@ export default function (options = {}) {
     }
   };
 }
+
+module.exports = index;

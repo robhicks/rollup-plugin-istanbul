@@ -1,15 +1,16 @@
+
 export default {
   input: 'src/index.js',
   plugins: [],
-  external: ['istanbul-lib-instrument', 'rollup-pluginutils'],
+  external: ['@rollup/pluginutils', 'istanbul-lib-instrument' ],
   output: [
     {
       format: 'cjs',
-      file: 'dist/rollup-plugin-istanbul.cjs.js'
+      file: 'index.js'
     },
     {
       format: 'es',
-      file: 'dist/rollup-plugin-istanbul.es.js'
+      file: 'index.mjs'
     }
   ]
 };
